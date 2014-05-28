@@ -1,0 +1,43 @@
+from Tkinter import *
+
+Window = Tk()
+ 
+x= 0
+y= 0
+ 
+v_x=2
+v_y=5
+ 
+dx=v_x
+dy=v_y
+ 
+def func(event):
+   if(event.keysym == "Up"):
+       canvas.move(object, 100,100)
+   elif(event.keysym == "Down"):
+       canvas.move(object, -100,-100)
+ 
+Window.bind("<Key>", func)
+ 
+canvas = Canvas(height=500, width=500, bg='white')
+canvas.pack()
+ 
+photo = PhotoImage(file="182.gif")
+object = canvas.create_image(x, y, image=photo)
+ 
+while True:
+   if x >=500:
+       dx = -1*v_x
+   if y >=500:
+       dy = -1*v_y
+   if x <= 0:
+       dx = v_x
+   if y <=0:
+       dy = v_y
+   canvas.move(object, dx,dy)
+   x=x+dx
+   y=y+dy
+   canvas.update()
+   canvas.after(10)
+ 
+Window.mainloop()
